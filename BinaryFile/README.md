@@ -1,0 +1,3 @@
+文件为VS项目目录下的代码目录
+
+如项目叫BinaryFile,则该目录的所有文件应该放在BinaryFile/BinaryFile文件夹中，第一个为项目目录，第二个为代码目录

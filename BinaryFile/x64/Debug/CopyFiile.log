@@ -1,0 +1,5 @@
+﻿  BinaryFile.cpp
+  CopyFIle.cpp
+c:\users\ylvan\source\repos\copyfiile\copyfiile\copyfile.cpp(36): warning C4244: “初始化”: 从“std::streamsize”转换到“unsigned int”，可能丢失数据
+  正在生成代码...
+  CopyFiile.vcxproj -> C:\Users\Ylvan\source\repos\CopyFiile\x64\Debug\BinaryFile.exe
