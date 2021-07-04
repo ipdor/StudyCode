@@ -1,0 +1,4 @@
+﻿  main.c
+f:\c++13期基础\12贪吃蛇案例\3-代码\贪吃蛇\贪吃蛇\main.c(57): warning C4013: “time”未定义；假设外部返回 int
+  贪吃蛇.vcxproj -> F:\c++13期基础\12贪吃蛇案例\3-代码\贪吃蛇\Debug\贪吃蛇.exe
+  贪吃蛇.vcxproj -> F:\c++13期基础\12贪吃蛇案例\3-代码\贪吃蛇\Debug\贪吃蛇.pdb (Full PDB)

@@ -1,0 +1,117 @@
+1 tcpdump
+
+    tcpdump -i <网卡名字>
+
+    如果是使用ssh远程来控制linux 再使用tcpdump进行抓包，导致死循环
+    因为每次抓包之后就要显示到ssh客户端上，也会产生通信报文，每次产生通信报文又会被抓包，依次循环
+
+
+    抓取的报文显示如下
+    09:52:02.968593 IP kali.ssh > 192.168.177.1.62564: Flags [P.], seq 5123876:5124232, ack 3349, win 293, options [nop,nop,TS val 4238057456 ecr 643507630], length 356   
+    抓包时间  报文类型(IP)  源主机:端口 > 目标主机:端口    报文的摘要     
+
+
+    -v -vv -vvv 将抓到的报文显示得更加详细
+
+    -w <文件名.pcap> 
+        将抓到的报文存成pcap文件， 典型用法是使用tcpdump抓包再拿到wireshark来分析
+
+
+    过滤条件
+        man pacap-filter 可以查看过滤条件的帮助信息
+        过滤主机
+            tcpdump [src|dst] host <ip>
+
+        过滤端口号
+            tcpdump [src|dst] port <端口号>
+
+        过滤协议
+            tcpdump tcp|udp|icmp...
+
+        条件与或非  and or not
+             tcpdump tcp and src host 220.181.112.244 and src port 80 
+
+
+
+2 telnet 
+    telnet是一个最简单的tcp客户端，也是一个协议，该协议以前操作linux服务器使用的协议
+    现在都用ssh  ,telnet协议不加密，只要能够抓包就能够看到上面的通信的信息
+
+    需求：部署telnet服务器，使用telnet客户端连接上去，输入用户名和密码，让wireshark抓包
+
+    安装telnet服务：
+    itcast@itcast $ sudo apt-get install telnet telnetd
+    apt-get install xinetd
+    vim /etc/xinetd.d/telnet
+    内容如下
+    service telnet  
+    {  
+        disable = no  
+        flags = REUSE  
+        socket_type = stream  
+        wait = no  
+        user = root  
+        server = /usr/sbin/in.telnetd  
+        server_args = -h  
+        log_on_failure += USERID  
+    }    
+    /etc/init.d/xinetd restart 重启服务
+
+
+
+    使用telnet客户端连接
+
+    telnet <ip>
+
+
+3 arp协议
+    
+    共识：发送IP报文 能够让对方机器成功捕获，以太网帧必须要填对方的物理地址
+
+    如果只知道对方的IP地址，而不知道物理地址，就必须使用ARP协议进行解析
+
+    A(192.168.1.1)想知道B机器(192.168.1.2)的物理地址
+
+        1 A发送一个广播报文 ，物理地址是 FF-FF-FF-FF-FF-FF
+            包含一个信息：谁是 192.168.1.2 ,回一下我，告诉我你的物理地址是啥
+
+        2 B收到该报文，做ARP回应，发送一个特定报文给A，告诉A他的物理地址
+
+        3 其他机器收到广播报文，不应答
+
+
+
+4 arp攻击
+
+    实验：实现arp的欺骗
+
+    靶机： 192.168.177.196     00:0c:29:b5:da:67
+    ubuntu web服务器: 192.168.177.170   00:0c:29:bf:94:68
+    攻击机: 192.168.177.165    00:0c:29:da:bf:07
+
+
+    靶机 正常情况系能够访问ubuntu的服务 
+    攻击机使用ARP攻击靶机，之后靶机要访问ubuntu的服务，就会访问不了
+
+
+    arpspoof -i <网卡名> -t <欺骗的目标> <我是谁>
+
+    arpspoof -i eth0 -t 192.168.177.196 192.168.177.170
+
+
+    同时，攻击机可以简单的开启 ip_forward功能将不是自己的ip报文丢给正确的机器
+    攻击机作为一个中间人来监听目标机器的通讯行为
+
+    echo 1 > /proc/sys/net/ipv4/ip_forward 
+
+
+
+    防御方式：
+    写死arp表对应机器的物理地址
+    sudo arp -s 192.168.177.170  00:0c:29:bf:94:68
+
+
+
+
+
+

@@ -1,0 +1,8 @@
+﻿  main.c
+f:\c++13期基础\06指针上\03-代码\consoleapplication1\consoleapplication1\main.c(65): warning C4013: “time”未定义；假设外部返回 int
+f:\c++13期基础\06指针上\03-代码\consoleapplication1\consoleapplication1\main.c(301): warning C4090: “初始化”: 不同的“const”限定符
+f:\c++13期基础\06指针上\03-代码\consoleapplication1\consoleapplication1\main.c(329): warning C4101: “a”: 未引用的局部变量
+f:\c++13期基础\06指针上\03-代码\consoleapplication1\consoleapplication1\main.c(348): warning C4700: 使用了未初始化的局部变量“p”
+f:\c++13期基础\06指针上\03-代码\consoleapplication1\consoleapplication1\main.c(67): warning C4172: 返回局部变量或临时变量的地址: num
+  ConsoleApplication1.vcxproj -> F:\c++13期基础\06指针上\03-代码\ConsoleApplication1\Debug\ConsoleApplication1.exe
+  ConsoleApplication1.vcxproj -> F:\c++13期基础\06指针上\03-代码\ConsoleApplication1\Debug\ConsoleApplication1.pdb (Full PDB)

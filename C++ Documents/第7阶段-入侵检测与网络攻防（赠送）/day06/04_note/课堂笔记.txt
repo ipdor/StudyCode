@@ -1,0 +1,323 @@
+1 基础命令
+    whoami 
+        查看我是谁
+
+    id [用户名]
+        查看某个用户的id信息，包括用户id，组id，以及所在组别
+
+    passwd [用户名]
+        修改某个用户的密码
+
+    useradd [选项] <用户名>
+        创建某个用户
+        -s /bin/bash 指定使用什么shell 默认是 /bin/sh
+        -m  同时创建用户的home目录
+
+    userdel [选项]  <用户名>
+        删除某个用户
+        -r 同时删除home目录等文件
+
+    usermod [选项] <用户名>
+        对某个用户属性进行修改
+        -G 组1,组2...  设定用户在哪个组
+        -aG 组1,组2... 将用户追加到哪些组里边
+
+
+
+    chown 用户名[:组名] 文件1 文件2 ....
+        修改某个用户的属主和属组
+
+
+
+
+
+2 ugo权限
+    
+    权限分   rwx
+        如果对应的权限是拥有的，标志位1，否则标志位0
+
+    权限标记位
+        rwx -> 111 ->十进制的7
+        rw- -> 110 ->十进制的6
+        -w- -> 010 ->十进制的2
+
+        -rw-r--r-- 1 root root     31168 4月  30 10:10 1.pcap  
+
+        权限标记可以使用 -rw-r--r--  -> 644
+
+
+        chmod <十进制的标记位数值>  文件  
+            修改某个文件的权限为对应的标记位数值
+            chmod 777 文件
+
+
+        chmod [a|u|g|o][+|-][rwx]  文件
+            chmod u+r 文件
+                对文件的user组权限添加读权限
+            chmod o-w 文件
+                对文件的other组权限回收写权限
+
+            chmod a+x 文件
+                对文件的所有组都添加可执行权限
+
+
+
+3 目录的权限
+    
+    目录的r权限，就是控制能否获取该目录结构
+    目录的w权限，就是控制能否修改该目录结构
+    目录的x权限，就是控制能否进入该目录进行操作的权限  简单认为就是 cd的权限
+
+
+    正常要读取一个目录，x权限是必须要给的
+
+
+4 目录的粘着位
+
+    需求：一个目录中只有文件的创建者（属主）可以删除该文件，其他用户不能删除
+        如果直接给目录other组设置一个w权限，所有用户都可以修改目录的结构，增加文件删除不是自己的文件
+
+
+    使用粘着位就刚好能够完成这个需求
+    使用条件：
+        黏着位只能对目录进行设置，对普通文件无效
+    怎么设置：
+        使用chmod
+
+        |s组|u组|g组|o组|
+
+        一般chmod 777 ，其实只修改后面3组
+        如果想修改s组，那么就要多添加一位数值
+
+        s组  ->     |set uid | set gid | sticky|  
+
+            如果要设置黏着位，s组应该是 001 -> 十进制的1
+
+            chmod 1777 目录名
+
+
+        设置了之后再 ls -l 查看 会发现
+            drwxrwxr-t 2 test02 test02 4096 5月   8 11:20 testdir     标记位后面是一个t，表示粘着位已经被设置
+
+
+    一些共享目录可以设置黏着位，保证安全，/tmp ....
+    服务器，如果有多个进程同时使用一个目录中的文件，设置这个目录的粘着位
+
+
+
+    set uid 
+        使用在一些可执行程序，当程序被执行启动一个进程的时候，系统内核就会修改该进程的用户id为该文件的用户id
+
+    set gid 
+        使用在一些可执行程序，当程序被执行启动一个进程的时候，系统内核就会修改该进程的组id为该文件的组id
+
+
+
+
+
+
+5 acl
+
+
+    对文件的访问权限根细粒度的划分
+
+    setfacl -m u:username:rwx filename
+
+        -m 表示要对acl进行修改
+
+            u   表示要对某个用户的权限进行修改
+            username   指定是哪个用户
+            rwx   对应是什么权限
+
+
+
+    itcast 用户的文件1.txt 对 test01这个用户有写的权限， 对test02这个用户有读的权限
+
+        setfacl -m u:test01:w  1.txt
+        setfacl -m u:test02:r  1.txt
+
+
+        设置完权限之后，再使用ls -l 来查看文件的权限，此时，可以看到
+        -rw-rw-r--+ 1 itcast itcast 6 5月   8 11:57 1.txt    多了一个+号 ，表示文件的权限不能够使用普通的方式来判断
+
+
+
+
+    如果要设定某个用户组的访问权限
+        setfacl -m g:组名:权限  文件名
+
+
+
+
+    查询文件的acl的访问列表
+        getfacl 文件名
+
+        # file: 1.txt           文件名
+        # owner: itcast         文件的属主
+        # group: itcast         文件的属组
+        user::rw-               属主拥有的权限
+        user:test02:r--         特定用户拥有的权限
+        user:test01:-w-         特定用户拥有的权限
+        group::r--              属组的用户拥有的权限
+        mask::rw-               掩码   
+        other::r--              其他用户拥有的权限
+
+
+
+    删除acl
+        setfacl -x u:用户名
+            删除某个用户特定的acl条目
+
+
+    mask
+        设置了mask之后
+
+        # file: 1.txt                                    
+        # owner: itcast                                  
+        # group: itcast                                  
+        user::rw-                                        
+        user:test01:rwx                 #effective:r--      test01对于该文件有rwx的权限，生效的权限只有r权限
+        group::r--                                       
+        mask::r--                                        
+        other::r--       
+
+        最终特定的权限要跟mask做按位与，才得到最终的生效的权限
+
+        修改mask的方法
+        setfacl -m m:rwx   文件名
+
+        删除mask的方法
+        setfacl -x m 文件名
+
+
+    权限判断依据
+        如果用户是文件属主， 按文件属主的权限位判定访问控制
+        如果用户不是文件属主， 而是符合ACL中的user项， 则按该项权限位判别且受mask限制。
+        如果用户的属组属于group或者ACL中group项， 只要组或者ACL的group项，允许优先且受mask限制。
+        否则应用Other的权限。
+
+
+6 文件属性
+
+    通过设置文件系统，对某个文件设置不可写，任何用户都没办法对其进行修改
+
+    文件系统：管理文件以怎么样的形式存储到物理介质上
+    编程我们使用 read/write api就可以对文件进行读写
+
+        ntfs
+        ext3
+        ext4
+        apfs
+
+    文件系统是依赖物理介质的
+    设置了文件系统的属性，连超级管理员都会受限，类似sd卡的开关
+
+    通过 man ext4 可以查看linux下 ext4文件系统可用的属性
+
+    a (append only) 仅允许以追加的方式打开文件(不允许移动、删除文件)
+    A (no atime updates)    这个属性不允许更新文件的atime    atime = access time 访问时间
+    c (compressed)  启用这个属性时，文件在磁盘上会自动压缩
+    d (no dump) 不能使用dump命令备份文件
+    D (synchronous directory updates)   设置了文件夹的D属性时，更改会在同步保存在磁盘上
+    e (extent format)   它表明，该文件使用磁盘上的块的映射扩展
+    i (immutable)   在文件上启用这个属性时，我们不能更改、重命名或者删除这个文件
+    j (data journaling) 设置了这个属性时，文件的数据首先保存在日志中，然后再写入文件
+    S (synchronous updates) 设置了这个属性时，变更或更改同步保存到磁盘上
+
+
+    修改文件属性
+        chattr +|-|=属性....  文件名
+
+        chattr +i 文件名
+
+    查看文件的属性
+        lsattr 文件名
+
+
+    只有root用户有权限去修改文件属性
+
+
+7 特权能力机制
+
+    将root用户的特权切分出来给予某个可执行程序
+
+    确定当前linux内核拥有多少特权
+    cat /proc/sys/kernel/cap_last_cap 
+    man capabilities
+
+
+    对某个文件设置特权
+
+    setcap "特权1,特权2..+ep" 可执行程序
+
+    setcap "CAP_DAC_OVERRIDE+ep" ./cat    给cat程序一个特权，越过权限判断来操作其他文件
+
+    查看应用程序的特权
+    getcap 应用程序
+
+
+    回收特权
+    setcap -r 应用程序
+
+
+    常用特权还有CAP_NET_BIND_SERVICE  允许绑定1024以下端口
+
+
+8 入侵分析技术
+    查看可疑用户
+
+    通过查看/etc/passwd 文件确定哪些用户是有执行shell的能力
+
+    查看该用户最近登录的信息
+        lastlog 用户名
+            最后一次登录的记录
+        last 用户名
+            最后n从的登录记录
+        lastb 用户名
+            最近的失败的登录的记录
+        finger hacker
+            查看用户的综合信息
+
+
+
+
+    查看有sudo权限的用户
+        查看 /etc/sudoers 文件确定哪些用户有sudo权限
+
+
+
+
+
+    可疑服务分析
+
+        自启动服务:
+            通过systemctl 来查看当前系统自启动的服务有哪些
+            systemctl list-unit-files --type=service | grep "enabled"
+
+        定时运行的命令：
+            查看 /etc/crontab 最后两列，对应哪个用户执行什么命令
+
+
+        用户登录就会执行的命令，查看一些bash的配置文件
+            非交互/非登录shell： $BASH_ENV（环境变量）
+            非交互/登录shell：/etc/profile ($HOME/.bash_profile、$HOME/.bash_login、$HOME/.profile按次序先存在的执行)
+            交互/非登录shell： /etc/bash_bashrc、$HOME/.bashrc
+            交互/登录shell：/etc/profile ($HOME/.bash_profile、$HOME/.bash_login、$HOME/.profile按次序先存在的执行)
+
+
+
+
+
+    命令历史查看
+        history 命令查看当前用户执行过的历史记录
+        对应的历史记录文件要看环境变量  HISTFILE   : echo $HISTFILE
+        设置历史文件的时间格式： 在 .bashrc 中添加环境变量   export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S"
+
+
+
+
+
+
+
+
+

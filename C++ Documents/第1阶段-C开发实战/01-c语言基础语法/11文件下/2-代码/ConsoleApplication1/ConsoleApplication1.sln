@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ConsoleApplication1", "ConsoleApplication1\ConsoleApplication1.vcxproj", "{F8A1EB31-EB83-4BE1-83E0-766A7992843B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "快易通", "..\快易通\快易通.vcxproj", "{7264F79E-0248-46E7-B89D-8DA99559638B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F8A1EB31-EB83-4BE1-83E0-766A7992843B}.Debug|x64.ActiveCfg = Debug|x64
+		{F8A1EB31-EB83-4BE1-83E0-766A7992843B}.Debug|x64.Build.0 = Debug|x64
+		{F8A1EB31-EB83-4BE1-83E0-766A7992843B}.Debug|x86.ActiveCfg = Debug|Win32
+		{F8A1EB31-EB83-4BE1-83E0-766A7992843B}.Debug|x86.Build.0 = Debug|Win32
+		{F8A1EB31-EB83-4BE1-83E0-766A7992843B}.Release|x64.ActiveCfg = Release|x64
+		{F8A1EB31-EB83-4BE1-83E0-766A7992843B}.Release|x64.Build.0 = Release|x64
+		{F8A1EB31-EB83-4BE1-83E0-766A7992843B}.Release|x86.ActiveCfg = Release|Win32
+		{F8A1EB31-EB83-4BE1-83E0-766A7992843B}.Release|x86.Build.0 = Release|Win32
+		{7264F79E-0248-46E7-B89D-8DA99559638B}.Debug|x64.ActiveCfg = Debug|x64
+		{7264F79E-0248-46E7-B89D-8DA99559638B}.Debug|x64.Build.0 = Debug|x64
+		{7264F79E-0248-46E7-B89D-8DA99559638B}.Debug|x86.ActiveCfg = Debug|Win32
+		{7264F79E-0248-46E7-B89D-8DA99559638B}.Debug|x86.Build.0 = Debug|Win32
+		{7264F79E-0248-46E7-B89D-8DA99559638B}.Release|x64.ActiveCfg = Release|x64
+		{7264F79E-0248-46E7-B89D-8DA99559638B}.Release|x64.Build.0 = Release|x64
+		{7264F79E-0248-46E7-B89D-8DA99559638B}.Release|x86.ActiveCfg = Release|Win32
+		{7264F79E-0248-46E7-B89D-8DA99559638B}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

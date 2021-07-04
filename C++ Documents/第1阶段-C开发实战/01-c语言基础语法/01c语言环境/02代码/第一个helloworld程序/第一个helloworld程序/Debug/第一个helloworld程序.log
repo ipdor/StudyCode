@@ -1,0 +1,5 @@
+﻿  02变量的定义.c
+f:\c++13期基础\01c语言环境\02代码\第一个helloworld程序\第一个helloworld程序\02变量的定义.c(17): warning C4305: “=”: 从“int”到“short”截断
+f:\c++13期基础\01c语言环境\02代码\第一个helloworld程序\第一个helloworld程序\02变量的定义.c(14): warning C4101: “abc_def”: 未引用的局部变量
+02变量的定义.obj : error LNK2001: 无法解析的外部符号 _SUM
+F:\c++13期基础\01c语言环境\02代码\第一个helloworld程序\Debug\第一个helloworld程序.exe : fatal error LNK1120: 1 个无法解析的外部命令

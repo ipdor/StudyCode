@@ -1,0 +1,8 @@
+﻿  Validating sources
+  Copying sources remotely to '192.168.64.143'
+  Validating architecture
+  Starting remote build
+  Compiling sources:
+  main.cpp
+  Linking objects
+  prj2_zinx_study.vcxproj -> C:\Users\markl\source\repos\prj2_zinx_study\prj2_zinx_study\bin\x64\Debug\prj2_zinx_study.out

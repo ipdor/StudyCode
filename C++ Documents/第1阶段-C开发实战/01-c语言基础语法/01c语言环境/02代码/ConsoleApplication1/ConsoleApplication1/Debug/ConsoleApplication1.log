@@ -1,0 +1,4 @@
+﻿  05浮点型.c
+f:\c++13期基础\01c语言环境\02代码\consoleapplication1\consoleapplication1\05浮点型.c(74): warning C4305: “初始化”: 从“double”到“float”截断
+  ConsoleApplication1.vcxproj -> F:\c++13期基础\01c语言环境\02代码\ConsoleApplication1\Debug\ConsoleApplication1.exe
+  ConsoleApplication1.vcxproj -> F:\c++13期基础\01c语言环境\02代码\ConsoleApplication1\Debug\ConsoleApplication1.pdb (Full PDB)

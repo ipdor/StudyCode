@@ -1,0 +1,5 @@
+﻿  08四则运算.c
+f:\c++13期基础\10文件上\3-代码\consoleapplication1\consoleapplication1\08四则运算.c(13): warning C4047: “return”:“FILE *”与“int”的间接级别不同
+f:\c++13期基础\10文件上\3-代码\consoleapplication1\consoleapplication1\08四则运算.c(22): warning C4013: “time”未定义；假设外部返回 int
+  ConsoleApplication1.vcxproj -> F:\c++13期基础\10文件上\3-代码\ConsoleApplication1\Debug\ConsoleApplication1.exe
+  ConsoleApplication1.vcxproj -> F:\c++13期基础\10文件上\3-代码\ConsoleApplication1\Debug\ConsoleApplication1.pdb (Full PDB)

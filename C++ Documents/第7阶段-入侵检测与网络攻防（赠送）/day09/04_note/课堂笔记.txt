@@ -1,0 +1,177 @@
+1 ssh剩余报文的识别
+    目前只识别了ssh版本协商的报文
+
+    剩余的报文，只要是同一个连接的，都标记位ssh报文
+
+    1 如何判断一个报文是不是同一个连接
+        连接如何标识
+        （源&目的）ip+端口
+        typedef struct dpi_tcp_connetion
+        {
+            uint32_t src_ip;
+            uint16_t src_port;
+            uint32_t dst_ip;
+            uint16_t dst_port;
+            dpi_protocol protocol;    //该链接对应的协议是什么协议
+        }dpi_tcp_connection;
+
+
+    2 如何查找之前已经被标识的连接
+        将这些已经被标识的连接存到一个容器里边
+        下次拿到一个TCP报文的时候，先从这个容器看一下是不是以前的已经被标识的连接
+        如果是：
+            直接判断该报文是什么协议的报文
+        否：
+            继续走以前的逻辑，一个一个协议分析的函数进行报文分析
+            分析出是某个协议的报文
+            添加一份连接信息到 链表中
+
+
+
+
+    容器如何选择：
+        C++:
+            vector
+                原理：将数据存储到一个连续的内存空间中 ，跟普通数组是差不多
+                优势：
+                    随机访问    O(1)
+                劣势：
+                    如果前面的数据进行增删，后边的数据都要移动
+
+            list  链表
+                原理：将多个独立的内存单元通过指针的形式逻辑上连接在一起
+                优势：
+                    前面数据插入删除不会影响到后面的数据  ， O(1)
+                劣势：
+                    随机访问效率低，跳到第N个节点  , O(n)
+
+
+            set/multiset  
+                原理：使用树来存，排序树
+
+                优势：
+                    自动排序
+                    查找性能高
+
+                劣势：
+                    不能随机访问
+                    增加删除数据 计算性能不高 
+
+
+            理想的容器是set
+
+
+
+    退一步使用list，方便编程
+
+    最后设计和实现一个带哨兵节点的双向循环链表，因为带哨兵节点比不带哨兵节点的链表操作方便
+
+2 链表的实现
+
+    节点的定义：
+    typedef struct dpi_list_node
+    {
+        void *data;             //泛化，能够存储任何类型数据的指针
+        struct dpi_list_node *prev;
+        struct dpi_list_node *next;
+    }dpi_list_node;
+
+    链表的定义：
+    typedef struct dpi_list
+    {
+        uint32_t size;      //链表当前长度
+        dpi_list_node sentinal;     //哨兵节点，肯定存在，链表的起始位置
+    }dpi_list;
+
+
+    接口定义：
+
+        1 初始化
+            dpi_list *dpi_list_create();    //创建一个链表
+                成功返回链表的指针
+                失败返回NULL
+
+        2 业务处理
+            int dpi_list_append(dpi_list *list , void *data);
+
+                list：往哪个链表追加数据
+                data: 追加数据的具体指针（该指针内存必须是堆上分配）
+
+                返回值：
+                    成功0
+                    失败非0
+
+
+        3 垃圾回收
+            void dpi_list_destroy(dpi_list *list)
+                释放整个链表，包括每个节点以及数据
+
+
+
+
+
+4 ssh剩余报文识别的总结
+    
+    1 识别一个连接是什么协议的连接
+        通过三次握手连接开始之后前面一两个报文能够确定
+
+        将该连接的信息存储起来，存到一个便于查找和遍历的容器中
+
+
+    2 剩余报文的分析
+        该报文的连接是已经被识别出是某个特定协议的就不需要再次识别单个报文
+
+        遍历之前的容器，确定当前报文是之前的某个连接的报文
+        连接的匹对要注意数据传输的方向
+
+
+
+
+5 sftp 文件传输指令
+
+
+    sftp user@host 
+        输入密码 ，sftp远程连接到某个机器
+
+
+        ls 查看远端当前目录的文件
+        cd 改变远端当前目录
+        pwd 查看远端当前是什么目录
+
+
+        lls 查看本地当前目录的文件
+        lcd 改变本地当前目录
+        lpwd 查看本地当前是什么目录
+
+
+
+        put [-r] 文件名
+            将本地当前目录的某个文件上传到远端当前目录
+
+        get [-r] 文件名
+            将远端当前目录的某个文件下载到本地当前目录
+
+
+
+
+
+
+6 tftp的安装
+    sudo apt-get install tftpd-hpa
+
+    itcast@itcast-teacher:~$ sudo vi /etc/default/tftpd-hpa 
+
+    TFTP_USERNAME="itcast"                使用什么用户来跑tftp服务，修改为你当前使用的用户 是 itcast还是root
+    TFTP_DIRECTORY="/home/itcast/tftp/"   上传或者下载文件的时候将文件放到哪个目录,不像sftp能够cd修改目录，只能固定一个目录
+    TFTP_ADDRESS=":69"                  服务绑定的地址，不需要修改，69端口
+    TFTP_OPTIONS="-l -s -c"
+            -l :以standalone/listen模式启动TFTP服务
+            -c: 可创建新文件。默认情况下TFTP只允许覆盖原有文件而不能创建新文件
+            -s : 改变TFTP启动的根目录，加了-s后，客户端使用TFTP时，不再需要输入指定目录，填写文件的文件路径，而是使用配置文件中写好的目录
+
+    重启服务
+    sudo /etc/init.d/tftpd-hpa restart
+
+
+
+

@@ -1,0 +1,18 @@
+﻿  03整数的输入.c
+f:\c++13期基础\01c语言环境\02代码\consoleapplication1\consoleapplication1\03整数的输入.c(18): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“std::size_t”
+  f:\c++13期基础\01c语言环境\02代码\consoleapplication1\consoleapplication1\03整数的输入.c(18): note: 请考虑在格式字符串中使用“%zd”
+f:\c++13期基础\01c语言环境\02代码\consoleapplication1\consoleapplication1\03整数的输入.c(19): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“std::size_t”
+  f:\c++13期基础\01c语言环境\02代码\consoleapplication1\consoleapplication1\03整数的输入.c(19): note: 请考虑在格式字符串中使用“%zd”
+f:\c++13期基础\01c语言环境\02代码\consoleapplication1\consoleapplication1\03整数的输入.c(20): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“std::size_t”
+  f:\c++13期基础\01c语言环境\02代码\consoleapplication1\consoleapplication1\03整数的输入.c(20): note: 请考虑在格式字符串中使用“%zd”
+f:\c++13期基础\01c语言环境\02代码\consoleapplication1\consoleapplication1\03整数的输入.c(21): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“std::size_t”
+  f:\c++13期基础\01c语言环境\02代码\consoleapplication1\consoleapplication1\03整数的输入.c(21): note: 请考虑在格式字符串中使用“%zd”
+f:\c++13期基础\01c语言环境\02代码\consoleapplication1\consoleapplication1\03整数的输入.c(22): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“std::size_t”
+  f:\c++13期基础\01c语言环境\02代码\consoleapplication1\consoleapplication1\03整数的输入.c(22): note: 请考虑在格式字符串中使用“%zd”
+f:\c++13期基础\01c语言环境\02代码\consoleapplication1\consoleapplication1\03整数的输入.c(24): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“std::size_t”
+  f:\c++13期基础\01c语言环境\02代码\consoleapplication1\consoleapplication1\03整数的输入.c(24): note: 请考虑在格式字符串中使用“%zd”
+  02进制打印方式.c
+  01数的溢出问题.c
+  正在生成代码...
+  ConsoleApplication1.vcxproj -> F:\c++13期基础\01c语言环境\02代码\ConsoleApplication1\x64\Debug\ConsoleApplication1.exe
+  ConsoleApplication1.vcxproj -> F:\c++13期基础\01c语言环境\02代码\ConsoleApplication1\x64\Debug\ConsoleApplication1.pdb (Full PDB)
