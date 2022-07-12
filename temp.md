@@ -1,3 +1,5 @@
+# [As censorship in China increases, VPNs are becoming more important](https://www.economist.com/china/2022/06/28/as-censorship-in-china-increases-vpns-are-becoming-more-important)
+
 第一段介绍了6.3李佳琦事件的经过，这件事无意间对VPN打了广告。
 
 第二段介绍了CN的网络审查制度和防火长城，包括最近说的网上所有评论都要经过审核，而梯子帮人绕开这些限制
