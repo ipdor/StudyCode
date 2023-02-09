@@ -4,7 +4,7 @@ import re
 
 def read_config(file_name):
     config = {}
-    with open(file_name) as f:
+    with open(file_name,encoding='utf-8') as f:
         for line in f:
             words = line.strip().split(',')
             config[words[0]] = set(words)
