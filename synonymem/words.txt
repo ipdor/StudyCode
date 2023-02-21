@@ -15,7 +15,7 @@ based on,ground,root,underlie
 neglect,overlook,underestimate,ignore
 chemical,toxic,unnatural,fertiliser
 this, these,those, it, they, such*,that*
-or,also,as well as,both … and,neither … nor …,not only … but also …,besides,in addition,other than,on the one hand, on the other hand,,and*
+or,also,as well as,both … and,neither … nor …,not only … but also …,besides,in addition,other than,on the one hand, on the other hand,and*
 instead,but,although,while,yet,however,whereas,nonetheless,nevertheless,notwithstanding,though,rather than*
 because,due to,as a result of,bring … to,cause,stem from,derive,owing to,according to,because of,on account of,leading to,since,for,in that,as,therefore,hence,thanks to*
 difference,variety,diversity
