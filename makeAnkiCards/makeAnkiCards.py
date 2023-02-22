@@ -5,9 +5,13 @@ import pandas as pd
 #writen by ChatGPT
 #pip install pandas genanki 需要安装pandas和genanki,pandas可能需要pip换源
 
+fileName="538考点词cards.csv"
+deckName="538Words"
+apkgFileName="538Words.apkg"
+
 #1.在 Excel 中将卡片问题和答案分别保存在第一列和第二列中，并将文件保存为 CSV 格式。
 #2.使用 Pandas 库读取 CSV 文件，将问题和答案保存在两个列表中。
-df = pd.read_csv("cards.csv")
+df = pd.read_csv(fileName)
 questions = df.iloc[:, 0].tolist()
 answers = df.iloc[:, 1].tolist()
 
@@ -29,7 +33,7 @@ model = genanki.Model(
 
 deck = genanki.Deck(
     2059400110,
-    'My Deck')
+    deckName)
 
 for question, answer in zip(questions, answers):
     note = genanki.Note(
@@ -37,5 +41,5 @@ for question, answer in zip(questions, answers):
         fields=[question, answer])
     deck.add_note(note)
 
-genanki.Package(deck).write_to_file('my_deck.apkg')
+genanki.Package(deck).write_to_file(apkgFileName)
 

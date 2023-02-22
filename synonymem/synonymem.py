@@ -101,7 +101,6 @@ def main():
     while True:
         memorize(words)
 
-
 if __name__ == '__main__':
     config.read_config()
     main()
