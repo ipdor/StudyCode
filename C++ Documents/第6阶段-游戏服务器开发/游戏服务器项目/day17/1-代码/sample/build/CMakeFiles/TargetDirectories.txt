@@ -1,3 +1,0 @@
-/home/run/cmake_test/sample/build/CMakeFiles/rebuild_cache.dir
-/home/run/cmake_test/sample/build/CMakeFiles/edit_cache.dir
-/home/run/cmake_test/sample/build/CMakeFiles/hello_world.dir

@@ -1,4 +1,0 @@
-﻿  main.c
-f:\c++13期基础\08内存管理\3-代码\consoleapplication3\main.c(180): warning C4013: “fun2”未定义；假设外部返回 int
-  ConsoleApplication3.vcxproj -> F:\c++13期基础\08内存管理\3-代码\ConsoleApplication1\Debug\ConsoleApplication3.exe
-  ConsoleApplication3.vcxproj -> F:\c++13期基础\08内存管理\3-代码\ConsoleApplication1\Debug\ConsoleApplication3.pdb (Full PDB)

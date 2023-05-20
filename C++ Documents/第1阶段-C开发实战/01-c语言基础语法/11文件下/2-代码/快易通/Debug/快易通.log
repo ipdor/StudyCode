@@ -1,6 +1,0 @@
-﻿  main.c
-f:\c++13期基础\11文件下\2-代码\快易通\main.c(138): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“__int64”
-  f:\c++13期基础\11文件下\2-代码\快易通\main.c(138): note: 请考虑在格式字符串中使用“%lld”
-  f:\c++13期基础\11文件下\2-代码\快易通\main.c(138): note: 请考虑在格式字符串中使用“%I64d”
-  快易通.vcxproj -> F:\c++13期基础\11文件下\2-代码\ConsoleApplication1\Debug\快易通.exe
-  快易通.vcxproj -> F:\c++13期基础\11文件下\2-代码\ConsoleApplication1\Debug\快易通.pdb (Full PDB)
