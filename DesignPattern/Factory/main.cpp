@@ -1,6 +1,7 @@
 /**
  * 
  * 工厂模式实现代码，参考:
+ * Factory Method in C++
  * https://refactoring.guru/design-patterns/factory-method/cpp/example
  *
  * 
