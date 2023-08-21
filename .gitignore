@@ -1,0 +1,38 @@
+# *************** CPP ignore files ***************
+
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# *************** other ***************
+# Don't put .idea and .vscode directories to project's .gitignore. 
+# You should configure a global .gitignore for your machine instead.
