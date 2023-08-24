@@ -4,7 +4,8 @@
  * Factory Method in C++
  * https://refactoring.guru/design-patterns/factory-method/cpp/example
  *
- * 
+ * Factory Method
+ * https://refactoring.guru/design-patterns/factory-method
  */ 
 #include "Factory.h"
 #include <iostream>
