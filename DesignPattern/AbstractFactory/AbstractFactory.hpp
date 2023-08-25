@@ -1,7 +1,7 @@
 /**
  * 
  * 1 abstract factory and 2 concrete factories
- * ! Each concrete factory creates a product A and a product B.
+ * ! Each concrete factory for each product variant: a product A and a product B.
  * 
  * 
  */
